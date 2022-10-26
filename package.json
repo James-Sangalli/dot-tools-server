@@ -1,0 +1,34 @@
+{
+  "name": "dot-tools-server",
+  "version": "1.0.0",
+  "description": "Schedule and serve cached information for dot tools",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "cache": "node worker.js",
+    "debug": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/James-Sangalli/dot-tools-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/James-Sangalli/dot-tools-server/issues"
+  },
+  "homepage": "https://github.com/James-Sangalli/dot-tools-server#readme",
+  "dependencies": {
+    "@polkadot/api": "^9.5.2",
+    "@polkadot/util": "^8.7.1",
+    "dot-validator-selector": "https://github.com/James-Sangalli/dot-validator-selector/archive/refs/tags/v1.0.4.tar.gz",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "knex": "^2.3.0",
+    "pg": "^8.8.0",
+    "sqlite": "^4.1.2",
+    "sqlite3": "^5.1.2",
+    "superagent": "^6.1.0"
+  }
+}
