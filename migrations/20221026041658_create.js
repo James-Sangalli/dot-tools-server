@@ -6,15 +6,15 @@ exports.up = function(knex) {
     return Promise.all([
         knex.schema.createTableIfNotExists('poolSelectorResultsTable', function(table) {
             table.increments('id')
-            table.string("results", 1.7976931348623157e+308)
+            table.specificType("results", "varchar");
         }),
         knex.schema.createTableIfNotExists('dotSelectorResultsTable', function(table) {
             table.increments('id')
-            table.string("results", 1.7976931348623157e+308)
+            table.specificType("results", "varchar");
         }),
         knex.schema.createTableIfNotExists('dotStakingPricesTable', function(table) {
             table.increments('id')
-            table.string("prices", 1.7976931348623157e+308)
+            table.specificType("prices", "varchar");
         }),
     ])
 };

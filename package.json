@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "cache": "node worker.js",
-    "debug": "nodemon app.js"
+    "debug": "nodemon app.js",
+    "knex": "knex migrate:rollback && knex migrate:latest"
   },
   "repository": {
     "type": "git",
