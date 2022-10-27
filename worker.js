@@ -44,6 +44,7 @@ async function updateValidatorSelectorCache(networks, selectors, amounts) {
     const data = {};
     for(let i = 0; i < selectors.length; i++) {
         data[networks[i]] = await selectors[i].getValidators(amounts[i]);
+        data[networks[i] + "Era"] = selectors[i].era;
         if(data[networks[i]].length === 0) return;
     }
     return new Promise((res, rej) => {
