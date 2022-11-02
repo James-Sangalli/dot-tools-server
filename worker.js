@@ -62,7 +62,7 @@ async function updatePoolSelectorCache(api, validatorSelector) {
         era: 0,
         minNumberOfValidators: 1,
         rootMinStake: new BN(0),
-        numberOfPools: 1,
+        numberOfPools: 10,
     }
     const pools = {};
     const poolSelector = new PoolSelector.default(validatorSelector, api, options);
