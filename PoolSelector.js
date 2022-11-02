@@ -21,13 +21,11 @@ class PoolSelector {
      */
     constructor(validatorSelector, api, options = Types_1.defaultOptions) {
         this.minStake = options.rootMinStake.mul(new util_2.BN(10)).pow(new util_2.BN(api.registry.chainDecimals[0].toString()));
-        this.minSpots = options.minSpots;
         this.desiredNumberOfPools = options.numberOfPools;
         this.era = options.era;
         this.minNumberOfValidators = options.minNumberOfValidators;
         this.api = api;
         this.validatorSelector = validatorSelector;
-        this.maxMembers = options.maxMembers;
         this.checkRootVerified = options.checkRootVerified;
         this.checkForDuplicateValidators = options.checkForDuplicateValidators;
         this.checkValidators = options.checkValidators;
@@ -88,10 +86,6 @@ class PoolSelector {
             }
             const meetsStakingRequirement = yield this.getRootMeetsStakeRequirement(poolInfo.roles.root);
             if (!meetsStakingRequirement) {
-                return pool;
-            }
-            const meetsMinSpotRequirement = this.maxMembers - poolInfo.memberCounter >= this.minSpots;
-            if (!meetsMinSpotRequirement) {
                 return pool;
             }
             if (this.checkValidators) {
@@ -189,7 +183,6 @@ class PoolSelector {
             const numberOfPools = yield this.api.query.nominationPools.counterForRewardPools();
             const randomisedOrder = PoolSelector.randomiseOrder(numberOfPools.toNumber());
             for (let i = 0; i < randomisedOrder.length; i++) {
-                console.log(randomisedOrder[i])
                 const pool = yield this.getPoolInfoAndMatchById(randomisedOrder[i]);
                 if (pool.pass)
                     matchingPools.push(pool);

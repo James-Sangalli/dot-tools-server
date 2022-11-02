@@ -56,13 +56,11 @@ async function updateValidatorSelectorCache(networks, selectors, amounts) {
 
 async function updatePoolSelectorCache(api, validatorSelector) {
     const options = {
-        checkForDuplicateValidators: false,
-        checkRootVerified: false,
-        checkValidators: false,
+        checkForDuplicateValidators: true,
+        checkRootVerified: true,
+        checkValidators: true,
         era: 0,
-        maxMembers: 1024, // TODO place polkadot default here on launch (currently kusama)
         minNumberOfValidators: 1,
-        minSpots: 1,
         rootMinStake: new BN(0),
         numberOfPools: 1,
     }

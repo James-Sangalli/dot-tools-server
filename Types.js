@@ -20,9 +20,7 @@ exports.defaultOptions = {
     checkRootVerified: false,
     checkValidators: false,
     era: 0,
-    maxMembers: 1024,
     minNumberOfValidators: 1,
-    minSpots: 1,
     rootMinStake: new util_1.BN(0),
     numberOfPools: 1,
 };
