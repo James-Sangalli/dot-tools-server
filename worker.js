@@ -14,7 +14,8 @@ async function main() {
     const selectorKSM = new ValidatorSelector(ksmAPI, undefined, undefined, 100);
     const selectorDOT = new ValidatorSelector(dotAPI, undefined, undefined, 1000);
     await updateValidatorSelectorCache(["ksm", "dot"], [selectorKSM, selectorDOT], [24, 16]);
-    await updatePoolSelectorCache(ksmAPI, selectorKSM); // TODO change to dot when ready
+    await updatePoolSelectorCache(ksmAPI, selectorKSM, false);
+    await updatePoolSelectorCache(dotAPI, selectorKSM, true);
     await updateStakingIncomeCache();
 }
 
@@ -54,14 +55,14 @@ async function updateValidatorSelectorCache(networks, selectors, amounts) {
     });
 }
 
-async function updatePoolSelectorCache(api, validatorSelector) {
+async function updatePoolSelectorCache(api, validatorSelector, isDot) {
     const options = {
         checkForDuplicateValidators: true,
         checkRootVerified: true,
         checkValidators: true,
         era: 0,
         minNumberOfValidators: 1,
-        rootMinStake: new BN(0),
+        rootMinStake: new BN(1),
         numberOfPools: 10,
     }
     const pools = {};
@@ -70,9 +71,15 @@ async function updatePoolSelectorCache(api, validatorSelector) {
     pools.results = await poolSelector.getPoolsMeetingCriteria();
     if(pools.results.length !== 0) {
         return new Promise((res, rej) => {
-            knex("poolSelectorResultsTable").insert({ results:  JSON.stringify(pools) })
-                .then((i) => { res(i) })
-                .catch((e) => { rej(e) });
+            if(isDot) {
+                knex("poolSelectorResultsTableDOT").insert({ results:  JSON.stringify(pools) })
+                    .then((i) => { res(i) })
+                    .catch((e) => { rej(e) });
+            } else {
+                knex("poolSelectorResultsTableKSM").insert({ results:  JSON.stringify(pools) })
+                    .then((i) => { res(i) })
+                    .catch((e) => { rej(e) });
+            }
         });
     }
 }

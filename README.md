@@ -8,8 +8,8 @@ Schedule and serve cached information for dot tools
 
 See [dot-validator-selector](https://github.com/James-Sangalli/dot-validator-selector) for more information. 
 
-### Get the latest recommended nomination pools for polkadot
-`$ curl https://dot-tool-server.herokuapp.com/dot-pool-selector`
+### Get the latest recommended nomination pools for polkadot/kusama
+`$ curl https://dot-tool-server.herokuapp.com/dot-pool-selector/ksm` or `$ curl https://dot-tool-server.herokuapp.com/dot-pool-selector/dot`
 
 See [dot-pool-selector](https://github.com/James-Sangalli/dot-pool-selector) for more information.
 

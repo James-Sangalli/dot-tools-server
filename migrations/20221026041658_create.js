@@ -4,7 +4,11 @@
  */
 exports.up = function(knex) {
     return Promise.all([
-        knex.schema.createTableIfNotExists('poolSelectorResultsTable', function(table) {
+        knex.schema.createTableIfNotExists('poolSelectorResultsTableDOT', function(table) {
+            table.increments('id')
+            table.specificType("results", "varchar");
+        }),
+        knex.schema.createTableIfNotExists('poolSelectorResultsTableKSM', function(table) {
             table.increments('id')
             table.specificType("results", "varchar");
         }),

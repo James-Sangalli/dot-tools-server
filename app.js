@@ -4,11 +4,18 @@ const port = process.env.PORT || 3000;
 const knexConfig = require('./knexfile.js');
 const knex = require('knex')(knexConfig[process.env.NODE_ENV || "development"]);
 
-app.get('/dot-pool-selector', (req, res) => {
+app.get('/dot-pool-selector/:network', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  knex("poolSelectorResultsTable").select("results").then((data) => {
-    res.send(data[data.length - 1].results);
-  });
+  const network = req.params.network;
+  if(network == "ksm") {
+    knex("poolSelectorResultsTableKSM").select("results").then((data) => {
+      res.send(data[data.length - 1].results);
+    });
+  } else {
+    knex("poolSelectorResultsTable").select("results").then((data) => {
+      res.send(data[data.length - 1].results);
+    });
+  }
 });
 
 app.get('/dot-validator-selector', (req, res) => {
