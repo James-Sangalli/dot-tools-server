@@ -12,7 +12,7 @@ app.get('/dot-pool-selector/:network', (req, res) => {
       res.send(data[data.length - 1].results);
     });
   } else {
-    knex("poolSelectorResultsTable").select("results").then((data) => {
+    knex("poolSelectorResultsTableDOT").select("results").then((data) => {
       res.send(data[data.length - 1].results);
     });
   }
