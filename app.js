@@ -9,10 +9,12 @@ app.get('/dot-pool-selector/:network', (req, res) => {
   const network = req.params.network;
   if(network == "ksm") {
     knex("poolSelectorResultsTableKSM").select("results").then((data) => {
+      console.log(data);
       res.send(data[data.length - 1].results);
     });
   } else {
     knex("poolSelectorResultsTableDOT").select("results").then((data) => {
+      console.log(data);
       res.send(data[data.length - 1].results);
     });
   }

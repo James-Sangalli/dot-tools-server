@@ -13,10 +13,14 @@ async function main() {
     const dotAPI = await ApiPromise.create({ provider: new WsProvider(polkadotProvider) });
     const selectorKSM = new ValidatorSelector(ksmAPI, undefined, undefined, 100);
     const selectorDOT = new ValidatorSelector(dotAPI, undefined, undefined, 1000);
-    await updateValidatorSelectorCache(["ksm", "dot"], [selectorKSM, selectorDOT], [24, 16]);
-    await updatePoolSelectorCache(ksmAPI, selectorKSM, false);
-    await updatePoolSelectorCache(dotAPI, selectorKSM, true);
-    await updateStakingIncomeCache();
+    const incomeUpdate = await updateStakingIncomeCache();
+    console.log("Income update: ", incomeUpdate);
+    const selectorUpdate = await updateValidatorSelectorCache(["ksm", "dot"], [selectorKSM, selectorDOT], [24, 16]);
+    console.log("Selector update: ", selectorUpdate);
+    const poolUpdateKSM = await updatePoolSelectorCache(ksmAPI, selectorKSM, false);
+    console.log("Pool update KSM: ", poolUpdateKSM);
+    const poolUpdateDOT = await updatePoolSelectorCache(dotAPI, selectorKSM, true);
+    console.log("Pool update DOT: ", poolUpdateDOT);
 }
 
 async function updateStakingIncomeCache() {
