@@ -23,7 +23,7 @@
   "dependencies": {
     "@polkadot/api": "^9.5.2",
     "@polkadot/util": "^8.7.1",
-    "dot-validator-selector": "https://github.com/James-Sangalli/dot-validator-selector/archive/refs/tags/v1.0.4.tar.gz",
+    "dot-validator-selector": "https://github.com/James-Sangalli/dot-validator-selector/archive/refs/tags/v1.0.6.tar.gz",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "knex": "^2.3.0",
